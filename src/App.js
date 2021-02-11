@@ -7,10 +7,10 @@ import blue from "./blue.png";
 import purp from "./purp.png";
 import black from "./black.png";
 import green from "./green.png";
-import Toggle from "./components/Toggle";
 
 function App() {
   const [value, setValue] = useState(0);
+  const [isToggled, setToggle] = useState(0);
 
   return (
     <motion.div
@@ -34,11 +34,13 @@ function App() {
             x: 25,
             y: 0,
             skew: -1.4,
+            opacity: 1,
           }}
           animate={{
             x: value + "px",
             y: 0,
             skew: 0,
+            opacity: isToggled,
           }}
           transition={{
             duration: 0.6,
@@ -47,7 +49,9 @@ function App() {
           Super Cool
         </motion.h2>
 
-        <Toggle />
+        <button onClick={() => setToggle((prevValue) => (prevValue ? 0 : 1))}>
+          Toggle
+        </button>
         <input
           type="range"
           min="-100"
