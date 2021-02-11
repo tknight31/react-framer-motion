@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardGrid, Container, Header } from "./Elements";
 import "./App.css";
@@ -7,21 +7,18 @@ import blue from "./blue.png";
 import purp from "./purp.png";
 import black from "./black.png";
 import green from "./green.png";
+import Toggle from "./components/Toggle";
 
 function App() {
+  const [value, setValue] = useState(0);
+
   return (
     <motion.div
       initial={{
         opacity: 0,
-        x: -50,
-        y: -50,
-        skew: 7.4,
       }}
       animate={{
         opacity: 1,
-        x: 0,
-        y: 0,
-        skew: 0,
       }}
       transition={{
         duration: 1.3,
@@ -34,21 +31,32 @@ function App() {
       <Container>
         <motion.h2
           initial={{
-            x: 500,
-            y: -0,
-            skew: -7.4,
+            x: 25,
+            y: 0,
+            skew: -1.4,
           }}
           animate={{
-            x: 0,
+            x: value + "px",
             y: 0,
             skew: 0,
           }}
           transition={{
-            duration: 1.3,
+            duration: 0.6,
           }}
         >
           Super Cool
         </motion.h2>
+
+        <Toggle />
+        <input
+          type="range"
+          min="-100"
+          max="100"
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+        />
         <CardGrid>
           <Card style={{ background: "var(--purp)" }}>
             <h3>Some card</h3>
