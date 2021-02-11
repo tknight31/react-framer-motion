@@ -8,6 +8,7 @@ import purp from "./purp.png";
 import black from "./black.png";
 import green from "./green.png";
 import Modal from "./components/Modal";
+import Accordion from "./components/Accordion";
 
 function App() {
   const [value, setValue] = useState(0);
@@ -49,6 +50,7 @@ function App() {
             <img alt="card" src={purp} />
           </Card>
         </Modal>
+        <Accordion />
 
         <CardGrid>
           <Card style={{ background: "var(--purp)" }}>
