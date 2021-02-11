@@ -7,6 +7,7 @@ import blue from "./blue.png";
 import purp from "./purp.png";
 import black from "./black.png";
 import green from "./green.png";
+import Modal from "./components/Modal";
 
 function App() {
   const [value, setValue] = useState(0);
@@ -71,6 +72,9 @@ function App() {
             setValue(e.target.value);
           }}
         />
+
+        <Modal isToggled={isToggled} />
+
         <CardGrid>
           <Card style={{ background: "var(--purp)" }}>
             <h3>Some card</h3>
