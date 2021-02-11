@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 
+const variants = {
+  open: { opacity: 1, height: "auto" },
+  closed: { opacity: 0, height: 0 },
+};
+
 const Accordion = () => {
   const [isToggled, setToggle] = useState(false);
 
@@ -14,9 +19,10 @@ const Accordion = () => {
         {isToggled && (
           <AccordionStyles
             as={motion.div}
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            variants={variants}
+            initial="closed"
+            animate="open"
+            exit="closed"
           >
             <motion.div initial={{ y: 50 }} animate={{ y: 0 }}>
               <p>
