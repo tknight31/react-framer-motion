@@ -11,7 +11,7 @@ import Modal from "./components/Modal";
 
 function App() {
   const [value, setValue] = useState(0);
-  const [isToggled, setToggle] = useState(0);
+  const [isToggled, setToggle] = useState(false);
 
   return (
     <motion.div
@@ -30,39 +30,9 @@ function App() {
         <h1>Header</h1>
       </Header>
       <Container>
-        <AnimatePresence>
-          {isToggled && (
-            <motion.h2
-              initial={{
-                x: 25,
-                y: 0,
-                skew: -1.4,
-                opacity: 1,
-              }}
-              animate={{
-                x: value + "px",
-                y: 0,
-                skew: 0,
-                opacity: isToggled,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
-              exit={{
-                x: 25,
-                y: 0,
-                skew: -1.4,
-                opacity: 0,
-              }}
-            >
-              Super Cool
-            </motion.h2>
-          )}
-        </AnimatePresence>
+        <h2>Super Cool</h2>
 
-        <button onClick={() => setToggle((prevValue) => (prevValue ? 0 : 1))}>
-          Toggle
-        </button>
+        <button onClick={() => setToggle(true)}>Toggle</button>
         <input
           type="range"
           min="-100"
@@ -73,7 +43,12 @@ function App() {
           }}
         />
 
-        <Modal isToggled={isToggled} />
+        <Modal isToggled={isToggled} setToggle={setToggle}>
+          <Card style={{ background: "var(--purp)" }}>
+            <h3>Some card</h3>
+            <img alt="card" src={purp} />
+          </Card>
+        </Modal>
 
         <CardGrid>
           <Card style={{ background: "var(--purp)" }}>

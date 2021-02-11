@@ -2,31 +2,21 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 
-const Modal = ({ isToggled, children }) => {
+const Modal = ({ isToggled, setToggle, children }) => {
   return (
     <AnimatePresence>
       {isToggled && (
         <ModalStyles
           as={motion.div}
-          initial={{
-            scale: 1.4,
-            opacity: 0,
-          }}
-          animate={{
-            scale: 1,
-            opacity: 1,
-          }}
-          exit={{
-            scale: 1.4,
-            opacity: 0,
-          }}
-          transition={{
-            duration: 0.8,
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          Hello
-          <button>Close</button>
-          {children}
+          <motion.div initial={{ y: 50 }} animate={{ y: 0 }}>
+            <button onClick={() => setToggle(false)}>Close</button>
+            {children}
+          </motion.div>
         </ModalStyles>
       )}
     </AnimatePresence>
@@ -34,11 +24,10 @@ const Modal = ({ isToggled, children }) => {
 };
 
 export const ModalStyles = styled(motion.div)`
-  width: 95%;
-  max-width: 600px;
-  background: red;
-  margin: 0 auto;
-  padding-bottom: 60px;
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
 `;
 
 export default Modal;
