@@ -9,10 +9,12 @@ import black from "./black.png";
 import green from "./green.png";
 import Modal from "./components/Modal";
 import Accordion from "./components/Accordion";
+import Nav from "./components/Nav";
 
 function App() {
   const [value, setValue] = useState(0);
   const [isToggled, setToggle] = useState(false);
+  const [isNavOpen, setNavOpen] = useState(false);
 
   return (
     <motion.div
@@ -27,7 +29,8 @@ function App() {
       }}
     >
       <Header>
-        <Menu />
+        <Menu setNavOpen={setNavOpen} />
+        <Nav isNavOpen={isNavOpen} setNavOpen={setNavOpen} />
         <h1>Header</h1>
       </Header>
       <Container>
