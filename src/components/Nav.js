@@ -13,13 +13,23 @@ const variants = {
   },
 };
 
+const ulVariants = {
+  open: {
+    scale: 1.02,
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.25,
+      staggerDirection: -1, // 1 forwards, -1 backwards
+      when: "afterChildren", // "afterChildren" "beforeChildren"
+    },
+  },
+  closed: { scale: 1 },
+};
+
 const liVariants = {
   open: {
     opacity: 1,
     y: 0,
-    transition: {
-      delay: 0.25,
-    },
   },
   closed: { opacity: 0, y: -20 },
 };
@@ -35,7 +45,7 @@ const Nav = ({ isNavOpen, setNavOpen }) => {
       transition={{ damping: 300 }}
     >
       <button onClick={() => setNavOpen(false)}>Close</button>
-      <ul>
+      <motion.ul variants={ulVariants}>
         {links.map((link, i) => {
           return (
             <motion.li variants={liVariants} key={`${link}_${i}`}>
@@ -45,7 +55,7 @@ const Nav = ({ isNavOpen, setNavOpen }) => {
             </motion.li>
           );
         })}
-      </ul>
+      </motion.ul>
     </MenuNav>
   );
 };
