@@ -4,8 +4,28 @@ import { motion } from "framer-motion";
 
 const variants = {
   open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: "-100%" },
+  closed: {
+    opacity: 0,
+    x: "-100%",
+    transition: {
+      delay: 0.25,
+    },
+  },
 };
+
+const liVariants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.25,
+    },
+  },
+  closed: { opacity: 0, y: -20 },
+};
+
+const links = ["one", "two", "three", "four"];
+
 const Nav = ({ isNavOpen, setNavOpen }) => {
   return (
     <MenuNav
@@ -16,26 +36,15 @@ const Nav = ({ isNavOpen, setNavOpen }) => {
     >
       <button onClick={() => setNavOpen(false)}>Close</button>
       <ul>
-        <li>
-          <a alt="one" href="#">
-            One
-          </a>
-        </li>
-        <li>
-          <a alt="two" href="#">
-            Two
-          </a>
-        </li>
-        <li>
-          <a alt="three" href="#">
-            Three
-          </a>
-        </li>
-        <li>
-          <a alt="four" href="#">
-            Four
-          </a>
-        </li>
+        {links.map((link, i) => {
+          return (
+            <motion.li variants={liVariants} key={`${link}_${i}`}>
+              <a alt={link} href="#">
+                {link}
+              </a>
+            </motion.li>
+          );
+        })}
       </ul>
     </MenuNav>
   );
@@ -56,11 +65,16 @@ const MenuNav = styled(motion.nav)`
   }
   li {
     padding: 0;
-    margin: 0;
+    margin: 0 0 1rem;
     a {
       color: white;
       text-decoration: none;
       font-size: 2rem;
+      border-bottom: 2px transparent solid;
+      transition: 0.3s ease border;
+      &:hover {
+        border-bottom: 2px var(--blue) solid;
+      }
     }
   }
 `;
