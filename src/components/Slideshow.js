@@ -33,10 +33,14 @@ const Slideshow = () => {
   const index = wrap(0, COLORS.length, page);
 
   return (
-    <div>
+    <div style={{ position: "relative", height: 400 }}>
       <AnimatePresence>
         <motion.div
           key={page}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={1} // between 0 and 1
@@ -52,10 +56,10 @@ const Slideshow = () => {
             height: 400,
             width: "100%",
             background: COLORS[index],
+            position: "absolute",
+            left: 0,
+            top: 0,
           }}
-          initial="enter"
-          animate="center"
-          exit="exit"
         ></motion.div>
       </AnimatePresence>
     </div>
