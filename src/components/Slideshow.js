@@ -11,22 +11,23 @@ const COLORS = [
 ];
 
 const variants = {
-  enter: {
-    x: 1000,
+  enter: (direction) => ({
+    x: direction > 0 ? 1000 : -1000,
     opacity: 0,
-  },
+  }),
   center: {
     x: 0,
     opacity: 1,
   },
-  exit: {
-    x: -1000,
+  exit: (direction) => ({
+    x: direction > 0 ? -1000 : 1000,
     opacity: 0,
-  },
+  }),
 };
 
 const Slideshow = () => {
   const [[page, direction], setPage] = useState([0, 0]);
+
   const paginate = (direction) => {
     setPage([page + direction, direction]);
   };
@@ -34,9 +35,10 @@ const Slideshow = () => {
 
   return (
     <div style={{ position: "relative", height: 400 }}>
-      <AnimatePresence>
+      <AnimatePresence custom={direction}>
         <motion.div
           key={page}
+          custom={direction}
           variants={variants}
           initial="enter"
           animate="center"
@@ -45,7 +47,6 @@ const Slideshow = () => {
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={1} // between 0 and 1
           onDragEnd={(e, { offset, velocity }) => {
-            console.log("🚀offset.x", offset.x);
             if (offset.x > 400) {
               paginate(-1);
             } else if (offset.x < -400) {
@@ -62,6 +63,10 @@ const Slideshow = () => {
           }}
         ></motion.div>
       </AnimatePresence>
+      <div style={{ zIndex: 10, position: "absolute" }}>
+        <button onClick={() => paginate(-1)}>{"<"}</button>
+        <button onClick={() => paginate(1)}>{">"}</button>
+      </div>
     </div>
   );
 };
