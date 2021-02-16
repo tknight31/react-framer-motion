@@ -16,6 +16,7 @@ import Modal from "./components/Modal";
 import Accordion from "./components/Accordion";
 import Nav from "./components/Nav";
 import Squares from "./components/Squares";
+import Slideshow from "./components/Slideshow";
 
 function App() {
   const [value, setValue] = useState(0);
@@ -44,6 +45,7 @@ function App() {
         <h1>Header</h1>
       </Header>
       <Container>
+        <Slideshow />
         <Squares />
         <h2>Super Cool</h2>
 
