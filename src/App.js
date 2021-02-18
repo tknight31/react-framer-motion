@@ -18,6 +18,7 @@ import Menu from "./Menu";
 import Nav from "./components/Nav";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
+import HoverTest from "./components/HoverTest";
 
 function App() {
   const [value, setValue] = useState(0);
@@ -49,10 +50,10 @@ function App() {
         <Link to="/about">About</Link>
       </Header>
       <Container>
-        <h2>Super Cool</h2>
+        <h2>Bruh</h2>
         <AnimatePresence exitBeforeEnter>
           <Switch location={location} key={location.pathname}>
-            <Route exact path="/" component={HomePage} />
+            <Route exact path="/" component={HoverTest} />
             <Route exact path="/about" component={AboutPage} />
           </Switch>
         </AnimatePresence>
